@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">DelegatedScopesManager</string>
+    <string name="title_app_list">Delegated Scopes Manager</string>
+
+    <string name="app_auth_extra_title">applies for the following permissions: </string>
+    <string name="toast_failure_read_app">Failure to read app info.</string>
+
+    <string name="delegation_app_restrictions">App restrictions</string>
+    <string name="delegation_block_uninstall">Block uninstall</string>
+    <string name="delegation_cert_install">Cert install</string>
+    <string name="delegation_enable_system_app">Enable system app</string>
+    <string name="delegation_install_existing_package">Install Existing package</string>
+    <string name="delegation_keep_uninstalled_packages">Keep Uninstalled packages</string>
+    <string name="delegation_package_access">Package access</string>
+    <string name="delegation_permission_grant">Permission grant</string>
+    <string name="dsm_delegation_set_app_ops">Change app ops</string>
+    <string name="dsm_delegation_install_uninstall_app">Install or uninstall applications</string>
+
+</resources>

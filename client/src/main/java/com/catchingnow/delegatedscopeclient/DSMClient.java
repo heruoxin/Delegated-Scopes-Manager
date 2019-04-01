@@ -1,0 +1,100 @@
+package com.catchingnow.delegatedscopeclient;
+
+import android.content.Context;
+import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+
+import java.util.List;
+
+/**
+ * @author heruoxin @ CatchingNow Inc.
+ * @since 2019-04-01
+ */
+public class DSMClient {
+    public static final int SDK_VERSION = 1;
+
+    public static final String ACTION_LIST = "android.app.develop.action.APP_DELEGATION_LIST";
+    public static final String ACTION_REQUEST_AUTH = "android.app.develop.action.APP_DELEGATION_AUTH";
+
+    public static final class Scopes {
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        public static final String INSTALL_UNINSTALL_APP = "dsm-delegation-install-uninstall-app";
+
+        @RequiresApi(api = Build.VERSION_CODES.P)
+        public static final String SET_APP_OPS = "dsm-delegation-set-app-ops";
+    }
+
+    /**
+     * Get the package name of current device owner or profile owner.
+     *
+     * @param context context
+     * @return package name of the device owner or profile owner
+     */
+    public static String getOwnerPackageName(Context context) {
+        return DSMClinetImplement.getOwnerPackageName(context);
+    }
+
+    /**
+     * Get the SDK version of owner.
+     * see {@link DSMClient#SDK_VERSION}
+     *
+     * @param context context
+     * @return owner SDK version. -1 for not found.
+     */
+    public static int getOwnerSDKVersion(Context context) {
+        return DSMClinetImplement.getOwnerSDKVersion(context);
+    }
+
+    /**
+     * Get the delegated scopes for yourself.
+     *
+     * @param context context
+     * @return scopes, no null
+     */
+    @NonNull
+    public static List<String> getDelegatedScopes(Context context) {
+        return DSMClinetImplement.getDelegatedScopes(context);
+    }
+
+    /**
+     * Install apk.
+     *
+     * @param context context
+     * @param apkUri uri to the apk file
+     * @param packageName packageName, optional
+     */
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static void installApp(Context context, Uri apkUri, @Nullable String packageName) throws Exception {
+         DSMClinetImplement.installApp(context, apkUri, packageName);
+    }
+
+    /**
+     * Uninstall app.
+     *
+     * @param context context
+     * @param packageName packageName
+     */
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static void uninstallApp(Context context, String packageName) throws Exception {
+        DSMClinetImplement.uninstallApp(context, packageName);
+    }
+
+    /**
+     *
+     * Set the AppOps state.
+     *
+     * @param context context
+     * @param opCode code
+     * @param uid udi
+     * @param packageName packageName
+     * @param mode mode
+     */
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    public static void setAppOpsMode(Context context, int opCode, int uid, String packageName, int mode) throws Exception {
+        DSMClinetImplement.setAppOpsMode(context, opCode, uid, packageName, mode);
+    }
+
+}

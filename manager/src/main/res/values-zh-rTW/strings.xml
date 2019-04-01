@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">托管權限管理</string>
+    <string name="title_app_list">托管權限管理</string>
+
+    <string name="app_auth_extra_title">申請下列權限: </string>
+    <string name="toast_failure_read_app">讀取程式信息失敗.</string>
+
+    <string name="delegation_app_restrictions">限制其他程式程序</string>
+    <string name="delegation_block_uninstall">禁止卸載某些程式程序</string>
+    <string name="delegation_cert_install">安裝根證書</string>
+    <string name="delegation_enable_system_app">啟用系統程式</string>
+    <string name="delegation_install_existing_package">安裝已存在的程式</string>
+    <string name="delegation_keep_uninstalled_packages">管理已卸載的程式</string>
+    <string name="delegation_package_access">管理已安裝的軟件包</string>
+    <string name="delegation_permission_grant">管理程式權限</string>
+    <string name="dsm_delegation_set_app_ops">更改 AppOps 狀態</string>
+    <string name="dsm_delegation_install_uninstall_app">安裝或卸載程式</string>
+
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.catchingnow.delegatedscopesmanager">
+
+    <application>
+        <activity
+            android:exported="true"
+            android:taskAffinity=":scopes"
+            android:name=".ui.AppListActivity">
+            <intent-filter>
+                <action android:name="android.app.develop.action.ADD_APP_DELEGATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.app.develop.action.APP_DELEGATION_LIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:enabled="true"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:taskAffinity=":scopes"
+            android:process=":dsm"
+            android:theme="@style/ScopeAppTheme.Dialog"
+            android:name=".ui.AppAuthActivity">
+            <intent-filter>
+                <action android:name="android.app.develop.action.APP_DELEGATION_AUTH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <provider
+            android:exported="true"
+            android:authorities="${applicationId}.DSM_CENTER"
+            android:name=".AppDelegateProvider"
+            android:process=":dsm"
+            tools:ignore="ExportedContentProvider"/>
+    </application>
+
+</manifest>
