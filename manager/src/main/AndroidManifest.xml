@@ -7,6 +7,7 @@
         <activity
             android:exported="true"
             android:taskAffinity=":scopes"
+            android:process=":dsm"
             android:name=".ui.AppListActivity">
             <intent-filter>
                 <action android:name="android.app.develop.action.ADD_APP_DELEGATION" />
