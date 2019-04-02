@@ -71,7 +71,7 @@ public class CenterAppBridge {
                                          Func func) {
         try {
             if (TextUtils.isEmpty(callingPackage)) throw new IllegalStateException("Unknown calling package!");
-            if (CenterApp.getInstance(context).getDelegatedScopes(callingPackage).contains(permission)) {
+            if (!CenterApp.getInstance(context).getDelegatedScopes(callingPackage).contains(permission)) {
                 throw new SecurityException("Package " + callingPackage + " dose not have permission " + permission + " !");
             }
             return func.apply(context, extras);
