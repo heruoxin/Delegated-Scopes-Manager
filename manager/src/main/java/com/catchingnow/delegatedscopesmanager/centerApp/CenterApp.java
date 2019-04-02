@@ -18,7 +18,7 @@ import java.util.List;
  */
 public interface CenterApp {
 
-    int SDK_VERSION = 1;
+    int SDK_VERSION = 2;
 
     /**
      * ACTION for open the delegation app list.
