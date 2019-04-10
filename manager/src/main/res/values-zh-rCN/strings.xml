@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">托管权限管理</string>
-    <string name="title_app_list">托管权限管理</string>
+    <string name="dsm_title_app_list">托管权限管理</string>
 
-    <string name="app_auth_extra_title">申请下列权限: </string>
-    <string name="toast_failure_read_app">读取应用信息失败.</string>
+    <string name="dsm_app_auth_extra_title">申请下列权限: </string>
+    <string name="dsm_toast_failure_read_app">读取应用信息失败.</string>
 
     <string name="delegation_app_restrictions">限制其他应用程序</string>
     <string name="delegation_block_uninstall">禁止卸载某些应用程序</string>

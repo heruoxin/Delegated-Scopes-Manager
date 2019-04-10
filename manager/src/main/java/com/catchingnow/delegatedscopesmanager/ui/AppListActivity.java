@@ -20,7 +20,7 @@ public class AppListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_app_list);
+        setContentView(R.layout.dsm_activity_app_list);
         initView();
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());
@@ -37,8 +37,8 @@ public class AppListActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        mToolbar = findViewById(R.id.toolbar);
-        mList = findViewById(R.id.list);
-        mProgressBar = findViewById(R.id.loading);
+        mToolbar = findViewById(R.id.dsm_toolbar);
+        mList = findViewById(R.id.dsm_list);
+        mProgressBar = findViewById(R.id.dsm_loading);
     }
 }

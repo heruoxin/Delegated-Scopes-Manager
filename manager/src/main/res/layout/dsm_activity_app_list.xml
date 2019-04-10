@@ -10,22 +10,22 @@
     tools:context=".ui.AppListActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        app:title="@string/title_app_list"
+        android:id="@+id/dsm_toolbar"
+        app:title="@string/dsm_title_app_list"
         android:elevation="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/list"
+        android:id="@+id/dsm_list"
         android:paddingTop="8dp"
         android:clipToPadding="false"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/dsm_toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <ProgressBar
-        android:id="@+id/loading"
+        android:id="@+id/dsm_loading"
         android:visibility="gone"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"

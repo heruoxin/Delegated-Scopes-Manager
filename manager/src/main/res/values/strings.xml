@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">DelegatedScopesManager</string>
-    <string name="title_app_list">Delegated Scopes Manager</string>
+    <string name="dsm_title_app_list">Delegated Scopes Manager</string>
 
-    <string name="app_auth_extra_title">applies for the following permissions: </string>
-    <string name="toast_failure_read_app">Failure to read app info.</string>
+    <string name="dsm_app_auth_extra_title">applies for the following permissions: </string>
+    <string name="dsm_toast_failure_read_app">Failure to read app info.</string>
 
     <string name="delegation_app_restrictions">App restrictions</string>
     <string name="delegation_block_uninstall">Block uninstall</string>

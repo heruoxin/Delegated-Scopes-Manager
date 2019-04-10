@@ -82,10 +82,10 @@ public class LoadAppInfoTask extends AsyncTask<AppListModel, AppListViewModel, A
 
     @Override
     protected void onPostExecute(AppListViewModel app) {
-        ((ImageView) mViewGroup.findViewById(R.id.icon)).setImageDrawable(app.icon);
-        ((ImageView) mViewGroup.findViewById(R.id.icon)).setContentDescription(app.name);
-        ((TextView) mViewGroup.findViewById(R.id.app_name)).setText(app.name);
-        ((TextView) mViewGroup.findViewById(R.id.description)).setText(app.description);
+        ((ImageView) mViewGroup.findViewById(R.id.dsm_icon)).setImageDrawable(app.icon);
+        ((ImageView) mViewGroup.findViewById(R.id.dsm_icon)).setContentDescription(app.name);
+        ((TextView) mViewGroup.findViewById(R.id.dsm_app_name)).setText(app.name);
+        ((TextView) mViewGroup.findViewById(R.id.dsm_description)).setText(app.description);
 
     }
 

@@ -11,27 +11,27 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
-        android:id="@+id/icon"
+        android:id="@+id/dsm_icon"
         tools:src="@mipmap/ic_launcher"
         android:layout_width="40dp"
         android:layout_height="40dp"/>
 
     <TextView
-        android:id="@+id/app_name"
+        android:id="@+id/dsm_app_name"
         tools:text="App Name"
         android:textColor="@color/colorTextPrimary"
         android:maxLines="1"
-        android:layout_toRightOf="@id/icon"
+        android:layout_toRightOf="@id/dsm_icon"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/dsm_description"
         tools:text="Permission1: ✔ \nPermission2: ✔ \nPermission3:  ✘ "
-        android:layout_toRightOf="@id/icon"
-        android:layout_below="@id/app_name"
+        android:layout_toRightOf="@id/dsm_icon"
+        android:layout_below="@id/dsm_app_name"
         android:layout_marginTop="4dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"

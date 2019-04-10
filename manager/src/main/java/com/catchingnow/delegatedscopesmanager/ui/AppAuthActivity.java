@@ -51,7 +51,7 @@ public class AppAuthActivity extends AppCompatActivity {
             finish();
             return;
         }
-        setContentView(R.layout.activity_app_auth);
+        setContentView(R.layout.dsm_activity_app_auth);
         initView();
         mCenterApp = CenterApp.getInstance(this);
         mBtnOk.setOnClickListener(v -> {
@@ -107,10 +107,10 @@ public class AppAuthActivity extends AppCompatActivity {
             delegatedScopes = new HashSet<>(mCenterApp.getDelegatedScopes(packageName));
             mPermissions.removeAllViews();
             for (String scope : requireScopes) {
-                ViewGroup card = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.card_app_permission, mPermissions, true);
+                ViewGroup card = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.dsm_card_app_permission, mPermissions, true);
                 String scopeName = mCenterApp.getScopeName(this, scope);
-                ((TextView) card.findViewById(R.id.name)).setText(TextUtils.isEmpty(scopeName) ? scope : scopeName);
-                CheckBox check = card.findViewById(R.id.check);
+                ((TextView) card.findViewById(R.id.dsm_name)).setText(TextUtils.isEmpty(scopeName) ? scope : scopeName);
+                CheckBox check = card.findViewById(R.id.dsm_check);
                 check.setChecked(delegatedScopes.contains(scope));
                 check.setOnCheckedChangeListener((buttonView, isChecked) -> {
                     if (isChecked) {
@@ -122,17 +122,17 @@ public class AppAuthActivity extends AppCompatActivity {
                 });
             }
         } catch (Exception ignore) {
-            Toast.makeText(this, R.string.toast_failure_read_app, Toast.LENGTH_SHORT)
+            Toast.makeText(this, R.string.dsm_toast_failure_read_app, Toast.LENGTH_SHORT)
                     .show();
             finish();
         }
     }
 
     private void initView() {
-        mAppIcon = findViewById(R.id.app_icon);
-        mAppName = findViewById(R.id.app_name);
-        mExtraTitle = findViewById(R.id.extra_title);
-        mPermissions = findViewById(R.id.permissions);
-        mBtnOk = findViewById(R.id.btn_ok);
+        mAppIcon = findViewById(R.id.dsm_app_icon);
+        mAppName = findViewById(R.id.dsm_app_name);
+        mExtraTitle = findViewById(R.id.dsm_extra_title);
+        mPermissions = findViewById(R.id.dsm_permissions);
+        mBtnOk = findViewById(R.id.dsm_btn_ok);
     }
 }

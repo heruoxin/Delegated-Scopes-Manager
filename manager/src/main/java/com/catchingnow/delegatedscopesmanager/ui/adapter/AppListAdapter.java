@@ -48,7 +48,7 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.AppListV
     @NonNull
     @Override
     public AppListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        return new AppListViewHolder((ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_app_list, parent, false));
+        return new AppListViewHolder((ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.dsm_card_app_list, parent, false));
     }
 
     @Override
