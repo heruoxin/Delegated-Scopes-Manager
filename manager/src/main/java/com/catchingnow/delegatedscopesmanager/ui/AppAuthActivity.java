@@ -2,7 +2,6 @@ package com.catchingnow.delegatedscopesmanager.ui;
 
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,12 +9,16 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.catchingnow.delegatedscopesmanager.R;
 import com.catchingnow.delegatedscopesmanager.centerApp.CenterApp;
-import com.catchingnow.delegatedscopesmanager.databinding.ActivityAppAuthBinding;
-import com.catchingnow.delegatedscopesmanager.databinding.CardAppPermissionBinding;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -29,12 +32,17 @@ import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class AppAuthActivity extends AppCompatActivity {
 
-    private ActivityAppAuthBinding mBinding;
     private CenterApp mCenterApp;
     private String packageName;
     private HashSet<String> delegatedScopes;
     @Nullable
     private String[] permissions;
+
+    private ImageView mAppIcon;
+    private TextView mAppName;
+    private TextView mExtraTitle;
+    private LinearLayout mPermissions;
+    private Button mBtnOk;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,9 +51,10 @@ public class AppAuthActivity extends AppCompatActivity {
             finish();
             return;
         }
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_app_auth);
+        setContentView(R.layout.activity_app_auth);
+        initView();
         mCenterApp = CenterApp.getInstance(this);
-        mBinding.btnOk.setOnClickListener(v -> {
+        mBtnOk.setOnClickListener(v -> {
             if (packageName != null && delegatedScopes != null) {
                 if (permissions == null) {
                     setResult(RESULT_OK);
@@ -91,20 +100,19 @@ public class AppAuthActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(packageName)) return;
         try {
             ApplicationInfo ai = getPackageManager().getApplicationInfo(packageName, 0);
-            mBinding.appName.setText(ai.loadLabel(getPackageManager()));
-            mBinding.appIcon.setImageDrawable(ai.loadIcon(getPackageManager()));
+            mAppName.setText(ai.loadLabel(getPackageManager()));
+            mAppIcon.setImageDrawable(ai.loadIcon(getPackageManager()));
 
             List<String> requireScopes = mCenterApp.getRequireScopes(packageName);
             delegatedScopes = new HashSet<>(mCenterApp.getDelegatedScopes(packageName));
-            mBinding.permissions.removeAllViews();
+            mPermissions.removeAllViews();
             for (String scope : requireScopes) {
-                CardAppPermissionBinding childBinding = CardAppPermissionBinding
-                        .inflate(LayoutInflater.from(this), mBinding.permissions, true);
-                //noinspection ConstantConditions
+                ViewGroup card = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.card_app_permission, mPermissions, true);
                 String scopeName = mCenterApp.getScopeName(this, scope);
-                childBinding.name.setText(TextUtils.isEmpty(scopeName) ? scope : scopeName);
-                childBinding.check.setChecked(delegatedScopes.contains(scope));
-                childBinding.check.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                ((TextView) card.findViewById(R.id.name)).setText(TextUtils.isEmpty(scopeName) ? scope : scopeName);
+                CheckBox check = card.findViewById(R.id.check);
+                check.setChecked(delegatedScopes.contains(scope));
+                check.setOnCheckedChangeListener((buttonView, isChecked) -> {
                     if (isChecked) {
                         delegatedScopes.add(scope);
                     } else {
@@ -120,4 +128,11 @@ public class AppAuthActivity extends AppCompatActivity {
         }
     }
 
+    private void initView() {
+        mAppIcon = findViewById(R.id.app_icon);
+        mAppName = findViewById(R.id.app_name);
+        mExtraTitle = findViewById(R.id.extra_title);
+        mPermissions = findViewById(R.id.permissions);
+        mBtnOk = findViewById(R.id.btn_ok);
+    }
 }

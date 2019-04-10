@@ -1,55 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+<RelativeLayout
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+    <ImageView
+        android:id="@+id/icon"
+        tools:src="@mipmap/ic_launcher"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
 
-        <variable
-            name="app"
-            type="com.catchingnow.delegatedscopesmanager.ui.vm.AppListViewModel"/>
-
-    </data>
-
-    <RelativeLayout
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+    <TextView
+        android:id="@+id/app_name"
+        tools:text="App Name"
+        android:textColor="@color/colorTextPrimary"
+        android:maxLines="1"
+        android:layout_toRightOf="@id/icon"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"/>
 
-        <ImageView
-            tools:src="@mipmap/ic_launcher"
-            android:src="@{app.icon}"
-            android:id="@+id/icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:contentDescription="@{app.name}"/>
+    <TextView
+        android:id="@+id/description"
+        tools:text="Permission1: ✔ \nPermission2: ✔ \nPermission3:  ✘ "
+        android:layout_toRightOf="@id/icon"
+        android:layout_below="@id/app_name"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        <TextView
-            tools:text="App Name"
-            android:text="@{app.name}"
-            android:id="@+id/app_name"
-            android:textColor="@color/colorTextPrimary"
-            android:maxLines="1"
-            android:layout_toRightOf="@id/icon"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            tools:text="Permission1: ✔ \nPermission2: ✔ \nPermission3:  ✘ "
-            android:text="@{app.description}"
-            android:id="@+id/description"
-            android:layout_toRightOf="@id/icon"
-            android:layout_below="@id/app_name"
-            android:layout_marginTop="4dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </RelativeLayout>
-</layout>
+</RelativeLayout>

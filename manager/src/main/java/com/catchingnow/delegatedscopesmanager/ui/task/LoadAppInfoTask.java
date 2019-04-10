@@ -6,9 +6,12 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.support.annotation.WorkerThread;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.catchingnow.delegatedscopesmanager.R;
 import com.catchingnow.delegatedscopesmanager.centerApp.CenterApp;
-import com.catchingnow.delegatedscopesmanager.databinding.CardAppListBinding;
 import com.catchingnow.delegatedscopesmanager.ui.m.AppListModel;
 import com.catchingnow.delegatedscopesmanager.ui.vm.AppListViewModel;
 
@@ -26,15 +29,16 @@ public class LoadAppInfoTask extends AsyncTask<AppListModel, AppListViewModel, A
 
     @SuppressLint("StaticFieldLeak")
     private final Context mContext;
-    private final CardAppListBinding mBinding;
+    @SuppressLint("StaticFieldLeak")
+    private final ViewGroup mViewGroup;
     private final PackageManager mPm;
     private final CenterApp mCenterApp;
 
-    public LoadAppInfoTask(CardAppListBinding binding) {
-        mBinding = binding;
-        mContext = mBinding.getRoot().getContext().getApplicationContext();
-        mPm = binding.getRoot().getContext().getPackageManager();
-        mCenterApp = CenterApp.getInstance(binding.getRoot().getContext());
+    public LoadAppInfoTask(ViewGroup vg) {
+        mViewGroup = vg;
+        mContext = vg.getContext().getApplicationContext();
+        mPm = mContext.getPackageManager();
+        mCenterApp = CenterApp.getInstance(mContext);
     }
 
     @Override
@@ -73,14 +77,16 @@ public class LoadAppInfoTask extends AsyncTask<AppListModel, AppListViewModel, A
 
     @Override
     protected void onProgressUpdate(AppListViewModel... values) {
-        mBinding.setApp(values[0]);
-        mBinding.getApp().notifyChange();
+        onPostExecute(values[0]);
     }
 
     @Override
     protected void onPostExecute(AppListViewModel app) {
-        mBinding.setApp(app);
-        mBinding.getApp().notifyChange();
+        ((ImageView) mViewGroup.findViewById(R.id.icon)).setImageDrawable(app.icon);
+        ((ImageView) mViewGroup.findViewById(R.id.icon)).setContentDescription(app.name);
+        ((TextView) mViewGroup.findViewById(R.id.app_name)).setText(app.name);
+        ((TextView) mViewGroup.findViewById(R.id.description)).setText(app.description);
+
     }
 
 }

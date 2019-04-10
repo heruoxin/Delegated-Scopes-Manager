@@ -1,34 +1,44 @@
 package com.catchingnow.delegatedscopesmanager.ui;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.widget.ProgressBar;
 
 import com.catchingnow.delegatedscopesmanager.R;
 import com.catchingnow.delegatedscopesmanager.ui.adapter.AppListAdapter;
-import com.catchingnow.delegatedscopesmanager.databinding.ActivityAppListBinding;
 import com.catchingnow.delegatedscopesmanager.ui.task.LoadListDataTask;
 
 public class AppListActivity extends AppCompatActivity {
-    private ActivityAppListBinding mBinding;
     private AppListAdapter mAdapter;
+    private Toolbar mToolbar;
+    private RecyclerView mList;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_app_list);
-        setSupportActionBar(mBinding.toolbar);
-        mBinding.toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        mBinding.list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        setContentView(R.layout.activity_app_list);
+        initView();
+        setSupportActionBar(mToolbar);
+        mToolbar.setNavigationOnClickListener(v -> onBackPressed());
+        mList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mAdapter = new AppListAdapter(this);
-        mBinding.list.setAdapter(mAdapter);
+        mList.setAdapter(mAdapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        new LoadListDataTask(mBinding, mAdapter)
+        new LoadListDataTask(mProgressBar, mList, mAdapter)
                 .execute();
+    }
+
+    private void initView() {
+        mToolbar = findViewById(R.id.toolbar);
+        mList = findViewById(R.id.list);
+        mProgressBar = findViewById(R.id.loading);
     }
 }

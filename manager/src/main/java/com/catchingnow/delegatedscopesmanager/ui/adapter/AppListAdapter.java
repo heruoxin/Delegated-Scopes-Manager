@@ -9,11 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.catchingnow.delegatedscopesmanager.R;
 import com.catchingnow.delegatedscopesmanager.centerApp.CenterApp;
-import com.catchingnow.delegatedscopesmanager.databinding.CardAppListBinding;
 import com.catchingnow.delegatedscopesmanager.ui.m.AppListModel;
 import com.catchingnow.delegatedscopesmanager.ui.task.LoadAppInfoTask;
-import com.catchingnow.delegatedscopesmanager.ui.vm.AppListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +48,7 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.AppListV
     @NonNull
     @Override
     public AppListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        return new AppListViewHolder(CardAppListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new AppListViewHolder((ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.card_app_list, parent, false));
     }
 
     @Override
@@ -64,20 +63,20 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.AppListV
     }
 
     class AppListViewHolder extends RecyclerView.ViewHolder {
-        private final CardAppListBinding mBinding;
         private AsyncTask mTask;
+        private final ViewGroup mViewGroup;
 
-        AppListViewHolder(CardAppListBinding binding) {
-            super(binding.getRoot());
-            mBinding = binding;
+        public AppListViewHolder(ViewGroup vg) {
+            super(vg);
+            mViewGroup = vg;
         }
 
         private void bind(AppListModel model) {
             if (mTask != null) {
                 mTask.cancel(true);
             }
-            mTask = new LoadAppInfoTask(mBinding).execute(model);
-            mBinding.getRoot().setOnClickListener(v -> {
+            mTask = new LoadAppInfoTask(mViewGroup).execute(model);
+            mViewGroup.setOnClickListener(v -> {
                 mContext.startActivity(new Intent(CenterApp.ACTION_APP_AUTH)
                         .putExtra("android.intent.extra.PACKAGE_NAME", model.ai.packageName)
                         .setPackage(mContext.getPackageName()));

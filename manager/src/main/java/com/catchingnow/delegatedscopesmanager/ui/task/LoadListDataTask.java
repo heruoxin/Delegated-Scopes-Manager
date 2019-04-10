@@ -1,14 +1,15 @@
 package com.catchingnow.delegatedscopesmanager.ui.task;
 
-import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.AsyncTask;
 import android.support.annotation.MainThread;
 import android.support.annotation.WorkerThread;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
-import com.catchingnow.delegatedscopesmanager.ui.adapter.AppListAdapter;
 import com.catchingnow.delegatedscopesmanager.centerApp.CenterApp;
-import com.catchingnow.delegatedscopesmanager.databinding.ActivityAppListBinding;
+import com.catchingnow.delegatedscopesmanager.ui.adapter.AppListAdapter;
 import com.catchingnow.delegatedscopesmanager.ui.m.AppListModel;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -23,21 +24,23 @@ import java.util.List;
  */
 public class LoadListDataTask extends AsyncTask<Void, Void, List<AppListModel>> {
     private final CenterApp mCenterApp;
-    private final ActivityAppListBinding mBinding;
+    private final ProgressBar mProgressBar;
+    private final RecyclerView mRecyclerView;
     private final AppListAdapter mAdapter;
 
-    public LoadListDataTask(ActivityAppListBinding binding, AppListAdapter adapter) {
+    public LoadListDataTask(ProgressBar progressBar, RecyclerView recyclerView, AppListAdapter adapter) {
         super();
+        mProgressBar = progressBar;
+        mRecyclerView = recyclerView;
         mAdapter = adapter;
-        Context context = binding.getRoot().getContext();
-        mCenterApp = CenterApp.getInstance(context);
-        mBinding = binding;
+        mCenterApp = CenterApp.getInstance(recyclerView.getContext());
     }
 
     @Override
     @MainThread
     protected void onPreExecute() {
-        mBinding.setLoading(true);
+        mProgressBar.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
     }
 
     @Override
@@ -58,7 +61,8 @@ public class LoadListDataTask extends AsyncTask<Void, Void, List<AppListModel>> 
     @Override
     @MainThread
     protected void onPostExecute(List<AppListModel> appListModels) {
-        mBinding.setLoading(false);
+        mProgressBar.setVisibility(View.GONE);
+        mRecyclerView.setVisibility(View.VISIBLE);
         mAdapter.fillData(appListModels);
     }
 
