@@ -16,6 +16,8 @@ Android 系统中，设备管理员可以在免 root 状态下提供相当广泛
   
   [DELEGATION_ENABLE_SYSTEM_APP](https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#DELEGATION_BLOCK_UNINSTALL)
   
+  ......
+  
 然后它也提供各类自定义权限，目前有：
 
   `dsm-delegation-install-uninstall-app` 安装卸载 App （API >= 26)
