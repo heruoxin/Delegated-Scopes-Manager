@@ -87,6 +87,13 @@ class DSMClinetImplement extends DSMClient {
         }
     }
 
+    public static void requestScopes(Context context, String... scopes) {
+        context.startActivity(new Intent(DSMClient.ACTION_REQUEST_AUTH)
+                .putExtra("android.intent.extra.PACKAGE_NAME", context.getPackageName())
+                .putExtra(DSMClient.ACTION_REQUEST_AUTH_PERMISSIONS, scopes)
+                .setPackage(DSMClient.getOwnerPackageName(context)));
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void installApp(Context context, Uri apkUri, @Nullable String packageName) throws Exception {
         String ownerPackageName = getOwnerPackageNameInternal(context);

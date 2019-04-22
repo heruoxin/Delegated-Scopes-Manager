@@ -1,5 +1,6 @@
 package com.catchingnow.delegatedscopeclient;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
@@ -18,6 +19,7 @@ public class DSMClient {
 
     public static final String ACTION_LIST = "android.app.develop.action.APP_DELEGATION_LIST";
     public static final String ACTION_REQUEST_AUTH = "android.app.develop.action.APP_DELEGATION_AUTH";
+    public static final String ACTION_REQUEST_AUTH_PERMISSIONS = "android.app.develop.action.APP_DELEGATION_AUTH_PERMISSIONS";
 
     public static final class Scopes {
         @RequiresApi(api = Build.VERSION_CODES.O)
@@ -58,6 +60,21 @@ public class DSMClient {
     public static List<String> getDelegatedScopes(Context context) {
         return DSMClinetImplement.getDelegatedScopes(context);
     }
+
+    /**
+     * Request the scopes.
+     *
+     * You will get RESULT_OK on {@link Activity#onActivityResult} if the user has granted ALL of the permissions.
+     * Otherwise RESULT_CANCEL will be returned.
+     *
+     * @param activity activity context
+     * @param scopes the scopes your app required
+     */
+    public static void requestScopes(Context activity, String... scopes) {
+        DSMClinetImplement.requestScopes(activity, scopes);
+    }
+
+    // ---------------------------
 
     /**
      * Install apk.

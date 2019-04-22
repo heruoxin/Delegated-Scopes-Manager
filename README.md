@@ -90,14 +90,9 @@ String packageName = DSMClient.getOwnerPackageName(context); // 可以获取到�
 List<String> scopes = DSMClient.getDelegatedScopes(context); // 检查当前已得到哪些托管授权
 
 // 申请权限
-context.startActivity(new Intent(DSMClient.ACTION_REQUEST_AUTH)
-     .putExtra(Intent.EXTRA_PACKAGE_NAME, context.getPackageName())
-     .putExtra(DSMClient.ACTION_REQUEST_AUTH_PERMISSIONS, new String[]{
-        // permissions
-     })
-     .setPackage(DSMClient.getOwnerPackageName(context)));
+DSMClient.requestScopes(activity, DevicePolicyManager.DELEGATION_ENABLE_SYSTEM_APP, "dsm-delegation-install-uninstall-app", ...);
      
-// 用户同意授予后会返回 `RESULT_OK`，否则返回 `RESULT_CANCEL`。
+// 用户同意授予全部你申请的权限后， `Activity#onActivityResult` 会回调 `RESULT_OK`，否则回调 `RESULT_CANCEL`。
 ```
 
 5. 对于系统权限，直接调用 DevicePolicyManager 中的相关方法即可，对于自定义权限，请参考 `DSMClient#installApp`，`DSMClient#setAppOpsMode` 等方法调用。
