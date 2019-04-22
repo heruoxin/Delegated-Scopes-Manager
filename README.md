@@ -67,7 +67,7 @@ implementation 'com.github.heruoxin.Delegated-Scopes-Manager:client:master-SNAPS
                 android:resource="@xml/app_delegation" />
         </receiver>
 ```
-建立 app_delegation.xml 文件，申请你需要的权限：
+建立 app_delegation.xml 文件，注册你需要的权限：
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <device-delegation>
