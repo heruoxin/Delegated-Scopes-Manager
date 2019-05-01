@@ -101,4 +101,4 @@ DSMClient.requestScopes(activity, DevicePolicyManager.DELEGATION_ENABLE_SYSTEM_A
 
 ## 目前有哪些 App 支持？
 
-目前作为管理员端支持的有[冰箱 IceBox](https://www.coolapk.com/apk/com.catchingnow.icebox)、[小黑屋](https://www.coolapk.com/apk/web1n.stopapp)。作为客户端支持的有[权限狗](https://www.coolapk.com/apk/com.web1n.permissiondog)
+目前作为管理员端支持的有[冰箱 IceBox](https://www.coolapk.com/apk/com.catchingnow.icebox)、[小黑屋](https://www.coolapk.com/apk/web1n.stopapp)。作为客户端支持的有[权限狗](https://www.coolapk.com/apk/com.web1n.permissiondog)。
