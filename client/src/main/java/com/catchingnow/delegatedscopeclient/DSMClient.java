@@ -2,6 +2,7 @@ package com.catchingnow.delegatedscopeclient;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -64,12 +65,20 @@ public class DSMClient {
     /**
      * Request the scopes.
      *
-     * You will get RESULT_OK on {@link Activity#onActivityResult} if the user has granted ALL of the permissions.
+     * You will get RESULT_OK on {@link Activity#onActivityResult(int, int, Intent)} if the user has granted ALL of the permissions.
      * Otherwise RESULT_CANCEL will be returned.
      *
      * @param activity activity context
      * @param scopes the scopes your app required
      */
+    public static void requestScopes(Activity activity, int requestCode, String... scopes) {
+        DSMClinetImplement.requestScopes(activity, requestCode, scopes);
+    }
+
+    /**
+     * Use {@link DSMClient#requestScopes(Activity, int, String...)} instead.
+     */
+    @Deprecated
     public static void requestScopes(Context activity, String... scopes) {
         DSMClinetImplement.requestScopes(activity, scopes);
     }

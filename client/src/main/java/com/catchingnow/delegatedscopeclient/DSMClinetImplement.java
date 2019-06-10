@@ -1,5 +1,6 @@
 package com.catchingnow.delegatedscopeclient;
 
+import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
@@ -87,6 +88,14 @@ class DSMClinetImplement extends DSMClient {
         }
     }
 
+    public static void requestScopes(Activity activity, int requestCode, String... scopes) {
+        activity.startActivityForResult(new Intent(DSMClient.ACTION_REQUEST_AUTH)
+                .putExtra("android.intent.extra.PACKAGE_NAME", activity.getPackageName())
+                .putExtra(DSMClient.ACTION_REQUEST_AUTH_PERMISSIONS, scopes)
+                .setPackage(DSMClient.getOwnerPackageName(activity)), requestCode);
+    }
+
+    @Deprecated
     public static void requestScopes(Context context, String... scopes) {
         context.startActivity(new Intent(DSMClient.ACTION_REQUEST_AUTH)
                 .putExtra("android.intent.extra.PACKAGE_NAME", context.getPackageName())
