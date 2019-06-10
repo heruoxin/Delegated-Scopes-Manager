@@ -50,6 +50,7 @@ public class LoadListDataTask extends AsyncTask<Void, Void, List<AppListModel>> 
         for (ApplicationInfo ai : mCenterApp.getDelegationApps()) {
             try {
                 List<String> policies = mCenterApp.getRequireScopes(ai.packageName);
+                if (policies.isEmpty()) continue;
                 List<String> delegatedScopes = mCenterApp.getDelegatedScopes(ai.packageName);
                 models.add(new AppListModel(ai, policies, delegatedScopes));
             } catch (XmlPullParserException | IOException ignored) {
