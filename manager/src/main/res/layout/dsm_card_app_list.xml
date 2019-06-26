@@ -11,8 +11,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
+        android:importantForAccessibility="no"
         android:id="@+id/dsm_icon"
-        tools:src="@mipmap/ic_launcher"
         android:layout_width="40dp"
         android:layout_height="40dp"/>
 

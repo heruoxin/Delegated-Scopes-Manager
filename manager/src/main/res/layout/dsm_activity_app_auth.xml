@@ -23,7 +23,6 @@
         <ImageView
             android:importantForAccessibility="no"
             android:id="@+id/dsm_app_icon"
-            tools:src="@mipmap/ic_launcher"
             android:layout_marginRight="16dp"
             android:layout_width="48dp"
             android:layout_height="48dp"/>

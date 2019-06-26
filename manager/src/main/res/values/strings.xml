@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">DelegatedScopesManager</string>
     <string name="dsm_title_app_list">Delegated Scopes Manager</string>
 
     <string name="dsm_app_auth_extra_title">applies for the following permissions: </string>

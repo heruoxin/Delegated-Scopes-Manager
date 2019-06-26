@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">托管權限管理</string>
     <string name="dsm_title_app_list">托管權限管理</string>
 
     <string name="dsm_app_auth_extra_title">申請下列權限: </string>

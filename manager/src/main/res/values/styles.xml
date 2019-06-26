@@ -1,9 +1,9 @@
 <resources>
 
-    <style name="ThemeBase" parent="Theme.AppCompat.DayNight.NoActionBar" />
+    <style name="DsmThemeBase" parent="Theme.AppCompat.DayNight.NoActionBar" />
 
     <!-- Base application theme. -->
-    <style name="ScopeAppTheme" parent="ThemeBase">
+    <style name="ScopeAppTheme" parent="DsmThemeBase">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
