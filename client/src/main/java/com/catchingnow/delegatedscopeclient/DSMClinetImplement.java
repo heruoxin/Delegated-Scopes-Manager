@@ -28,11 +28,13 @@ class DSMClinetImplement extends DSMClient {
     private static final String METHOD_INSTALL_APP = "CenterAppBridge:METHOD_INSTALL_APP";
     private static final String METHOD_UNINSTALL_APP = "CenterAppBridge:METHOD_UNINSTALL_APP";
     private static final String METHOD_SET_APP_OPS = "CenterAppBridge:METHOD_SET_APP_OPS";
+    private static final String METHOD_RESET_APP_OPS = "CenterAppBridge:METHOD_RESET_APP_OPS";
 
     private static final String EXTRA_SCOPES = "CenterAppBridge:EXTRA_SCOPES";
     private static final String EXTRA_SDK_VERSION = "CenterAppBridge:EXTRA_SDK_VERSION";
     private static final String EXTRA_APP_OP_CODE = "CenterAppBridge:EXTRA_APP_OP_CODE";
     private static final String EXTRA_APP_OP_MODE = "CenterAppBridge:EXTRA_APP_OP_MODE";
+    private static final String EXTRA_USER_ID = "CenterAppBridge:EXTRA_USER_ID";
 
     public static String getOwnerPackageName(Context context) {
         int flag = 0;
@@ -144,6 +146,19 @@ class DSMClinetImplement extends DSMClient {
         Bundle call = context.getContentResolver().call(Uri.parse("content://" + getOwnerPackageNameInternal(context) +
                         ".DSM_CENTER"),
                 METHOD_SET_APP_OPS, null, bundle);
+        if (call != null && call.containsKey(Intent.ACTION_APP_ERROR)) {
+            throw (Exception) call.getSerializable(Intent.ACTION_APP_ERROR);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    public static void resetAppOps(Context context, int userId, String packageName) throws Exception {
+        Bundle bundle = new Bundle();
+        bundle.putInt(EXTRA_USER_ID, userId);
+        bundle.putString(Intent.EXTRA_PACKAGE_NAME, packageName);
+        Bundle call = context.getContentResolver().call(Uri.parse("content://" + getOwnerPackageNameInternal(context) +
+                        ".DSM_CENTER"),
+                METHOD_RESET_APP_OPS, null, bundle);
         if (call != null && call.containsKey(Intent.ACTION_APP_ERROR)) {
             throw (Exception) call.getSerializable(Intent.ACTION_APP_ERROR);
         }

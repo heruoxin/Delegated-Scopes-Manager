@@ -26,11 +26,13 @@ public class CenterAppBridge {
     private static final String METHOD_INSTALL_APP = "CenterAppBridge:METHOD_INSTALL_APP";
     private static final String METHOD_UNINSTALL_APP = "CenterAppBridge:METHOD_UNINSTALL_APP";
     private static final String METHOD_SET_APP_OPS = "CenterAppBridge:METHOD_SET_APP_OPS";
+    private static final String METHOD_RESET_APP_OPS = "CenterAppBridge:METHOD_RESET_APP_OPS";
 
     private static final String EXTRA_SCOPES = "CenterAppBridge:EXTRA_SCOPES";
     private static final String EXTRA_SDK_VERSION = "CenterAppBridge:EXTRA_SDK_VERSION";
     private static final String EXTRA_APP_OP_CODE = "CenterAppBridge:EXTRA_APP_OP_CODE";
     private static final String EXTRA_APP_OP_MODE = "CenterAppBridge:EXTRA_APP_OP_MODE";
+    private static final String EXTRA_USER_ID = "CenterAppBridge:EXTRA_USER_ID";
 
     public static Bundle call(Context context, String callingPackage, @NonNull String method,
                               @Nullable String arg,
@@ -50,8 +52,11 @@ public class CenterAppBridge {
             case METHOD_SET_APP_OPS:
                 return permissionWrap("dsm-delegation-set-app-ops", context, callingPackage, extras,
                         CenterAppBridge::setAppOps);
+            case METHOD_RESET_APP_OPS:
+                return permissionWrap("dsm-delegation-set-app-ops", context, callingPackage, extras,
+                        CenterAppBridge::resetAppOps);
         }
-        return null;
+        return toError(new IllegalArgumentException("unsupported method " + method));
     }
 
     private static Bundle getSDK(Context context) {
@@ -102,6 +107,14 @@ public class CenterAppBridge {
                 extras.getInt(Intent.EXTRA_UID),
                 extras.getString(Intent.EXTRA_PACKAGE_NAME),
                 extras.getInt(EXTRA_APP_OP_MODE));
+        return new Bundle();
+    }
+
+    @SuppressLint("NewApi")
+    private static Bundle resetAppOps(Context context, Bundle extras) {
+        AppOpsUtil.resetAllModes(
+                extras.getInt(EXTRA_USER_ID),
+                extras.getString(Intent.EXTRA_PACKAGE_NAME));
         return new Bundle();
     }
 

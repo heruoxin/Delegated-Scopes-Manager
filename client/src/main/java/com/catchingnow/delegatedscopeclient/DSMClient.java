@@ -120,7 +120,7 @@ public class DSMClient {
      *
      * @param context context
      * @param opCode code
-     * @param uid udi
+     * @param uid uid
      * @param packageName packageName
      * @param mode mode
      */
@@ -129,4 +129,22 @@ public class DSMClient {
         DSMClinetImplement.setAppOpsMode(context, opCode, uid, packageName, mode);
     }
 
+    /**
+     *
+     * Reset the AppOps state.
+     *
+     * The device owner can only SET the AppOps states but can not GET the AppOps states.
+     * For get the AppOps state you have to register the "android.permission.GET_APP_OPS_STATS" permission in manifests.
+     * Then ask user to grant it manually through ADB command:
+     *
+     *     adb shell pm grant com.your.package android.permission.GET_APP_OPS_STATS
+     *
+     * @param context context
+     * @param userId user id
+     * @param packageName packageName
+     */
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    public static void resetAppOps(Context context, int userId, String packageName) throws Exception {
+        DSMClinetImplement.resetAppOps(context, userId, packageName);
+    }
 }
