@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2019-04-01
  */
 public class DSMClient {
-    public static final int SDK_VERSION = 2;
+    public static final int SDK_VERSION = 3;
 
     public static final String ACTION_LIST = "android.app.develop.action.APP_DELEGATION_LIST";
     public static final String ACTION_REQUEST_AUTH = "android.app.develop.action.APP_DELEGATION_AUTH";
