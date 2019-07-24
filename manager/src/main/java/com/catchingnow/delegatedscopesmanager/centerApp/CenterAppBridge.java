@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -111,7 +112,7 @@ public class CenterAppBridge {
     }
 
     @SuppressLint("NewApi")
-    private static Bundle resetAppOps(Context context, Bundle extras) {
+    private static Bundle resetAppOps(Context context, Bundle extras) throws RemoteException {
         AppOpsUtil.resetAllModes(
                 extras.getInt(EXTRA_USER_ID),
                 extras.getString(Intent.EXTRA_PACKAGE_NAME));
