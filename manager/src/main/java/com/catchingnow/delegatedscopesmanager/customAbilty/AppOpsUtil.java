@@ -3,6 +3,7 @@ package com.catchingnow.delegatedscopesmanager.customAbilty;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.Build;
+import android.os.IBinder;
 import android.support.annotation.RequiresApi;
 
 import com.catchingnow.delegatedscopesmanager.util.Hack;
@@ -25,6 +26,35 @@ public class AppOpsUtil {
                 .withParams(int.class, int.class, String.class, int.class)
                 .invoke(opCode, uid, packageName, mode)
                 .on(sManager);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    public static void resetAllModes(int userId, String packageName) {
+        IBinder binder = Hack.into("android.os.ServiceManager")
+                .method("getService")
+                .returning(IBinder.class)
+                .withParams(String.class)
+                .invoke(Context.APP_OPS_SERVICE)
+                .statically();
+
+        Object appopsService;
+        try {
+            appopsService = Hack.into("com.android.internal.app.IAppOpsService$Stub")
+                    .method("asInterface")
+                    .returning(Class.forName("com.android.internal.app.IAppOpsService"))
+                    .withParams(IBinder.class)
+                    .invoke(binder)
+                    .statically();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        Hack.into("com.android.internal.app.IAppOpsService")
+                .method("resetAllModes")
+                .returning(void.class)
+                .withParams(int.class, String.class)
+                .invoke(userId, packageName)
+                .on(appopsService);
     }
 
 }
