@@ -4,6 +4,7 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.annotation.RequiresApi;
 
 import com.catchingnow.delegatedscopesmanager.util.Hack;
@@ -29,9 +30,9 @@ public class AppOpsUtil {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
-    public static void resetAllModes(int userId, String packageName) {
+    public static void resetAllModes(int userId, String packageName) throws RemoteException {
         IBinder binder = Hack.into("android.os.ServiceManager")
-                .method("getService")
+                .staticMethod("getService")
                 .returning(IBinder.class)
                 .withParams(String.class)
                 .invoke(Context.APP_OPS_SERVICE)
@@ -40,7 +41,7 @@ public class AppOpsUtil {
         Object appopsService;
         try {
             appopsService = Hack.into("com.android.internal.app.IAppOpsService$Stub")
-                    .method("asInterface")
+                    .staticMethod("asInterface")
                     .returning(Class.forName("com.android.internal.app.IAppOpsService"))
                     .withParams(IBinder.class)
                     .invoke(binder)
@@ -52,6 +53,7 @@ public class AppOpsUtil {
         Hack.into("com.android.internal.app.IAppOpsService")
                 .method("resetAllModes")
                 .returning(void.class)
+                .throwing(RemoteException.class)
                 .withParams(int.class, String.class)
                 .invoke(userId, packageName)
                 .on(appopsService);
