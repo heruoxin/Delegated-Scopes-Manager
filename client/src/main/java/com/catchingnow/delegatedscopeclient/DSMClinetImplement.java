@@ -105,7 +105,7 @@ class DSMClinetImplement extends DSMClient {
                 .setPackage(DSMClient.getOwnerPackageName(context)));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public static void installApp(Context context, Uri apkUri, @Nullable String packageName) throws Exception {
         String ownerPackageName = getOwnerPackageNameInternal(context);
         context.grantUriPermission(ownerPackageName, apkUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -124,7 +124,7 @@ class DSMClinetImplement extends DSMClient {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public static void uninstallApp(Context context, String packageName) throws Exception {
         Bundle bundle = new Bundle();
         bundle.putString(Intent.EXTRA_PACKAGE_NAME, packageName);

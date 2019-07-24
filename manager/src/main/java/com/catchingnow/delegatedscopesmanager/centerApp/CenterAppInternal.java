@@ -58,7 +58,7 @@ class CenterAppInternal implements CenterApp {
         sKnownPolicies.put("delegation-permission-grant", R.string.delegation_permission_grant);
 
         sKnownCustomPolicies = new ArrayMap<>();
-        if (Build.VERSION.SDK_INT >= 26) {
+        if (Build.VERSION.SDK_INT >= 23) {
             sKnownCustomPolicies.put("dsm-delegation-install-uninstall-app", R.string.dsm_delegation_install_uninstall_app);
         }
         if (Build.VERSION.SDK_INT >= 28) {

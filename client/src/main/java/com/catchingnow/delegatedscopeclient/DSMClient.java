@@ -23,7 +23,7 @@ public class DSMClient {
     public static final String ACTION_REQUEST_AUTH_PERMISSIONS = "android.app.develop.action.APP_DELEGATION_AUTH_PERMISSIONS";
 
     public static final class Scopes {
-        @RequiresApi(api = Build.VERSION_CODES.O)
+        @RequiresApi(api = Build.VERSION_CODES.M)
         public static final String INSTALL_UNINSTALL_APP = "dsm-delegation-install-uninstall-app";
 
         @RequiresApi(api = Build.VERSION_CODES.P)
@@ -92,7 +92,7 @@ public class DSMClient {
      * @param apkUri uri to the apk file
      * @param packageName packageName, optional
      */
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public static void installApp(Context context, Uri apkUri, @Nullable String packageName) throws Exception {
          DSMClinetImplement.installApp(context, apkUri, packageName);
     }
@@ -103,7 +103,7 @@ public class DSMClient {
      * @param context context
      * @param packageName packageName
      */
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public static void uninstallApp(Context context, String packageName) throws Exception {
         DSMClinetImplement.uninstallApp(context, packageName);
     }

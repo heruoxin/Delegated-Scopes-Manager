@@ -20,7 +20,7 @@ Android 系统中，设备管理员可以在免 root 状态下提供相当广泛
   
 然后它也提供各类自定义权限，目前有：
 
-  `dsm-delegation-install-uninstall-app` 安装卸载 App （API >= 26)
+  `dsm-delegation-install-uninstall-app` 安装卸载 App （API >= 23)
   
   `dsm-delegation-set-app-ops` 设置 AppOps 状态（API >= 28)
 
