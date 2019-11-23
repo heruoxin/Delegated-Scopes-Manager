@@ -103,11 +103,19 @@ public class CenterAppBridge {
 
     @SuppressLint("NewApi")
     private static Bundle setAppOps(Context context, Bundle extras) {
-        AppOpsUtil.setMode(context,
-                extras.getInt(EXTRA_APP_OP_CODE),
-                extras.getInt(Intent.EXTRA_UID),
-                extras.getString(Intent.EXTRA_PACKAGE_NAME),
-                extras.getInt(EXTRA_APP_OP_MODE));
+        if (extras.containsKey(Intent.EXTRA_PACKAGE_NAME)) {
+            AppOpsUtil.setMode(context,
+                    extras.getInt(EXTRA_APP_OP_CODE),
+                    extras.getInt(Intent.EXTRA_UID),
+                    extras.getString(Intent.EXTRA_PACKAGE_NAME),
+                    extras.getInt(EXTRA_APP_OP_MODE));
+        } else {
+            AppOpsUtil.setUidMode(context,
+                    extras.getInt(EXTRA_APP_OP_CODE),
+                    extras.getInt(Intent.EXTRA_UID),
+                    extras.getInt(EXTRA_APP_OP_MODE));
+        }
+
         return new Bundle();
     }
 

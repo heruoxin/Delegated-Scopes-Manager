@@ -152,6 +152,20 @@ class DSMClinetImplement extends DSMClient {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
+    public static void setAppOpsUidMode(Context context, int opCode, int uid, int mode) throws Exception {
+        Bundle bundle = new Bundle();
+        bundle.putInt(EXTRA_APP_OP_CODE, opCode);
+        bundle.putInt(Intent.EXTRA_UID, uid);
+        bundle.putInt(EXTRA_APP_OP_MODE, mode);
+        Bundle call = context.getContentResolver().call(Uri.parse("content://" + getOwnerPackageNameInternal(context) +
+                        ".DSM_CENTER"),
+                METHOD_SET_APP_OPS, null, bundle);
+        if (call != null && call.containsKey(Intent.ACTION_APP_ERROR)) {
+            throw (Exception) call.getSerializable(Intent.ACTION_APP_ERROR);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
     public static void resetAppOps(Context context, int userId, String packageName) throws Exception {
         Bundle bundle = new Bundle();
         bundle.putInt(EXTRA_USER_ID, userId);

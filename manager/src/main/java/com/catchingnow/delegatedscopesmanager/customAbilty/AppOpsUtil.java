@@ -30,6 +30,19 @@ public class AppOpsUtil {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
+    public static void setUidMode(Context context, int opCode, int uid, int mode) {
+        if (sManager == null) {
+            sManager = context.getSystemService(AppOpsManager.class);
+        }
+        Hack.into(AppOpsManager.class)
+                .method("setUidMode")
+                .returning(void.class)
+                .withParams(int.class, int.class, int.class)
+                .invoke(opCode, uid, mode)
+                .on(sManager);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
     public static void resetAllModes(int userId, String packageName) throws RemoteException {
         IBinder binder = Hack.into("android.os.ServiceManager")
                 .staticMethod("getService")
